@@ -96,7 +96,7 @@ There is no administration, at least for now. Future releases will let you contr
 
 == Upgrade Notice ==
 
-= 1.12=
+= 1.12 =
 New icons(thanks to Peter Upfold), detection of Opera on iPhone, and improved iPhone detection!
 
 = 1.11 =
