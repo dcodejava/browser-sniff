@@ -19,9 +19,9 @@ Detects web browser type and operating system to show in the comment loop
 == Installation ==
 
 1. Download and extract the plugin, you should see a browser-sniff directory
-1. Install like any other Wordpress plugin, just unzip and put the folder in your wp-content/plugins directory
+1. Install like any other Wordpress plugin, just place the browser-sniff folder in your wp-content/plugins directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php pri_print_browser("Using ", "", true, 'on'); ?>` in your templates, especifically on the comment loop. See the Usage section for mor info
+1. Place `<?php pri_print_browser("Using ", "", true, 'on'); ?>` in your templates, especifically on the comment loop. See the Usage section for more info
 1. (optional) You can change how the icon look in your CSS by modifying style for selector img.browsericon
 
 == Frequently Asked Questions ==
@@ -38,7 +38,7 @@ Yes, you can, and I appreciate that. Some icons may not be the best, but I don't
 
 I'm not the original author, Priyadi from [http://priyadi.net](http://priyadi.net) is. But he discontinued the development, so I contacted him and now I'm the new maintaner/developer of it. I'm an author, but not the original one.
 
-= I can't find the plugin administration on WP! Why?
+= I can't find the plugin administration on WP! Why? =
 
 There is no administration, at least for now. Future releases will let you control a series of options from the panel, but not now.
 
@@ -88,7 +88,16 @@ There is no administration, at least for now. Future releases will let you contr
 * WP compliant, no need to create a browsers directory anymore
 * First release on http://wordpress.org/extend/plugins
 
+= 1.12 =
+* Added new Icons for MAC OS X, Internet Explorer and Safari, Thanks to [Peter Upfold](http://peter.upfold.org.uk/)
+* Detects Opera Mini for iPhone
+* Fixed detecting for Safari on iPhone.
+* Detects iPhone OS Version if available.
+
 == Upgrade Notice ==
+
+= 1.12=
+New icons(thanks to Peter Upfold), detection of Opera on iPhone, and improved iPhone detection!
 
 = 1.11 =
 First release on http://wordpress.org/extend/plugins, with maintaner change(to Bruno Pedrassani). Just get it :)

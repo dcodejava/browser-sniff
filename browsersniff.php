@@ -3,7 +3,7 @@
 Plugin Name: Browser Sniff
 Plugin URI: http://brunopedrassani.com/wordpress/plugins/browser-sniff
 Description: Detects web browser type and operating system to show in the comment loop
-Version: 1.11
+Version: 1.12
 Author: Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani(maintaner)
 Author URI: http://priyadi.net/
 */
@@ -274,9 +274,6 @@ function pri_detect_browser ($ua) {
 		} else {
 			list($os_name, $os_code, $os_ver) = pri_unix_detect_os($ua);
 		}
-		//$os_name = "Mac OS";
-		//$os_code = "macos";
-		//$os_ver = "X";
 	} elseif (preg_match('#NetNewsWire/([a-zA-Z0-9.]+)#i', $ua, $matches)) {
 		$browser_name = 'NetNewsWire';
 		$browser_code = 'netnewswire';
@@ -289,7 +286,13 @@ function pri_detect_browser ($ua) {
 		$browser_code = 'opera';
 		preg_match('#Opera/([a-zA-Z0-9.]+)#i', $ua, $matches);
 		$browser_ver = $matches[1];
-		list($os_name, $os_code, $os_ver, $pda_name, $pda_code, $pda_ver) = pri_pda_detect_os($ua);
+		list($os_name, $os_code, $os_ver) = pri_windows_detect_os($ua);
+		if (!$os_name) {
+			list($os_name, $os_code, $os_ver) = pri_unix_detect_os($ua);
+		}
+		if (!$os_name) {
+			list($os_name, $os_code, $os_ver, $pda_name, $pda_code, $pda_ver) = pri_pda_detect_os($ua);
+		}
 	} elseif (preg_match('#Opera[ /]([a-zA-Z0-9.]+)#i', $ua, $matches)) {
 		$browser_name = 'Opera';
 		$browser_code = 'opera';
@@ -625,15 +628,14 @@ function pri_unix_detect_os ($ua) {
 	} elseif (preg_match('/SunOS/i', $ua)) {
 		$os_name = "Solaris";
 		$os_code = "sun";
+	} elseif (preg_match('/iPhone/i', $ua) ) {
+		list($os_name, $os_code, $os_ver) = pri_iphone_detect_os($ua);
 	} elseif (preg_match('/Mac OS X/i', $ua)) {
 		$os_name = "Mac OS";
 		$os_code = "macos";
 		$os_ver = "X";
 	} elseif (preg_match('/Macintosh/i', $ua)) {
 		$os_name = "Mac OS";
-		$os_code = "macos";
-	} elseif (preg_match('/iPhone/i', $ua)) {
-		$os_name = "iPhone OS";
 		$os_code = "macos";
 	} elseif (preg_match('/Unix/i', $ua)) {
 		$os_name = "UNIX";
@@ -700,4 +702,18 @@ function pri_pda_detect_os ($ua) {
 		$pda_code = "wii";
 	}
 	return array($os_name, $os_code, $os_ver, $pda_name, $pda_code, $pda_ver);
+}
+
+function pri_iphone_detect_os( $ua ){
+	if (preg_match('#iPhone OS ([a-zA-Z0-9_]+)#i', $ua, $matches)) {
+		$os_ver = str_replace('_','.',$matches[1]);
+		$os_name = "iPhone OS";
+		$os_code = "macos";
+	}
+	else {
+		$os_ver = "";
+		$os_name = "iPhone OS";
+		$os_code = "macos";
+	}
+	return array($os_name, $os_code, $os_ver);
 }
