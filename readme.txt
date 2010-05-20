@@ -90,8 +90,14 @@ There is no administration, at least for now. Future releases will let you contr
 
 = 1.12 =
 * Added new Icons for MAC OS X, Internet Explorer and Safari, Thanks to [Peter Upfold](http://peter.upfold.org.uk/)
+* Detects Opera Mini for iPhone
+* Fixed detecting for Safari on iPhone.
+* Detects iPhone OS Version if available.
 
 == Upgrade Notice ==
+
+= 1.12=
+New icons(thanks to Peter Upfold), detection of Opera on iPhone, and improved iPhone detection!
 
 = 1.11 =
 First release on http://wordpress.org/extend/plugins, with maintaner change(to Bruno Pedrassani). Just get it :)
