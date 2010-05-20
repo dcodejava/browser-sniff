@@ -19,9 +19,9 @@ Detects web browser type and operating system to show in the comment loop
 == Installation ==
 
 1. Download and extract the plugin, you should see a browser-sniff directory
-1. Install like any other Wordpress plugin, just unzip and put the folder in your wp-content/plugins directory
+1. Install like any other Wordpress plugin, just place the browser-sniff folder in your wp-content/plugins directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php pri_print_browser("Using ", "", true, 'on'); ?>` in your templates, especifically on the comment loop. See the Usage section for mor info
+1. Place `<?php pri_print_browser("Using ", "", true, 'on'); ?>` in your templates, especifically on the comment loop. See the Usage section for more info
 1. (optional) You can change how the icon look in your CSS by modifying style for selector img.browsericon
 
 == Frequently Asked Questions ==
