@@ -38,7 +38,7 @@ Yes, you can, and I appreciate that. Some icons may not be the best, but I don't
 
 I'm not the original author, Priyadi from [http://priyadi.net](http://priyadi.net) is. But he discontinued the development, so I contacted him and now I'm the new maintaner/developer of it. I'm an author, but not the original one.
 
-= I can't find the plugin administration on WP! Why?
+= I can't find the plugin administration on WP! Why? =
 
 There is no administration, at least for now. Future releases will let you control a series of options from the panel, but not now.
 
