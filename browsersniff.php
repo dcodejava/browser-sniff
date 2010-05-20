@@ -3,7 +3,7 @@
 Plugin Name: Browser Sniff
 Plugin URI: http://brunopedrassani.com/wordpress/plugins/browser-sniff
 Description: Detects web browser type and operating system to show in the comment loop
-Version: 1.11
+Version: 1.12
 Author: Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani(maintaner)
 Author URI: http://priyadi.net/
 */

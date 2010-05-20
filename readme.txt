@@ -88,6 +88,9 @@ There is no administration, at least for now. Future releases will let you contr
 * WP compliant, no need to create a browsers directory anymore
 * First release on http://wordpress.org/extend/plugins
 
+= 1.12 =
+* Added new Icons for MAC OS X, Internet Explorer and Safari, Thanks to [Peter Upfold](http://peter.upfold.org.uk/)
+
 == Upgrade Notice ==
 
 = 1.11 =
