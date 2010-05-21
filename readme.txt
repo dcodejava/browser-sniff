@@ -4,7 +4,7 @@ Donate link:
 Tags: browser, operating system, browser sniff
 Requires at least: 1.5.0
 Tested up to: 2.9.2
-Stable tag: 1.12
+Stable tag: 1.13
 
 Detects web browser type and operating system to show in the comment loop
 
