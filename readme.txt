@@ -94,7 +94,25 @@ There is no administration, at least for now. Future releases will let you contr
 * Fixed detecting for Safari on iPhone.
 * Detects iPhone OS Version if available.
 
+= 1.13 =
+* Detects Android phones
+* Detects Default Android browser
+* Added icons for Android, Android browser, webOS, ZuneHD and Windows Phone OS
+* Fixed Opera Mini/Mobile version detection
+* Detects iPad
+* Detects iPod
+* Detects iPad OS version if available
+* Detects Palm WebOS
+* Detects Safari on SymbianOS
+* Detects IE Mobile
+* Detects ZuneHD
+* Detects Windows Phone OS
+* Fixed Avant Browser detection
+
 == Upgrade Notice ==
+
+= 1.13 =
+Tons of new detections, new icons and some bug fixes!
 
 = 1.12 =
 New icons(thanks to Peter Upfold), detection of Opera on iPhone, and improved iPhone detection!
