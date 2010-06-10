@@ -1,25 +1,184 @@
 <?php
+/**
+ * @package Browser-Sniff
+ * @author Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
+ * @version 2.0
+ */
 /*
 Plugin Name: Browser Sniff
 Plugin URI: http://brunopedrassani.com/wordpress/plugins/browser-sniff
 Description: Detects web browser type and operating system to show in the comment loop
-Version: 1.13
+Version: 2.0
 Author: Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani(maintaner)
-Author URI: http://priyadi.net/
+Author URI: http://brunopedrassani.com
 */
 
-// begin settings
-
-### specify width and height for icons here
-$pri_width_height = "14";
-
+// begin global settings
 $pri_image_url = get_settings('siteurl') . "/wp-content/plugins/browser-sniff/icons";
 $pri_image_path = ABSPATH . "/wp-content/plugins/browser-sniff/icons";
-
 // end settings
 
-function pri_print_browser ($before = '', $after = '', $image = false, $between = 'on') {
+
+
+// ######################################## Adding Options Page Functions #######################################################
+
+function bs_options() {
+	
+	// if submitted, process results
+	if ( $_POST["bs_submit"] ) {
+		
+		$tmp = array();
+		
+		$tmp['width'] = stripslashes($_POST["bs_width"]);
+		$tmp['height'] = stripslashes($_POST["bs_height"]);
+		$tmp['before'] = stripslashes($_POST["bs_before"]);
+		$tmp['between'] = stripslashes($_POST["bs_between"]);
+		$tmp['after'] = stripslashes($_POST["bs_after"]);
+		$tmp['show_icons'] = stripslashes($_POST["bs_show_icons"]);
+		$tmp['position'] = stripslashes($_POST["bs_position"]);
+		
+		update_option('bs_options', serialize($tmp));
+	}
+	
+	//get options from database
+	$dbBsOptions = array();
+	$dbBsOptions = unserialize(get_option('bs_options'));
+	
+	//load Options or set default
+	if (!$dbBsOptions['width']) {
+		$dbBsOptions['width'] = "14";
+	}
+	
+	if (!$dbBsOptions['height']) {
+		$dbBsOptions['height'] = "14";
+	}
+
+	if (!$dbBsOptions['before']) {
+		$dbBsOptions['before'] = "Using";
+	}
+
+	if (!$dbBsOptions['between']) {
+		$dbBsOptions['between'] = "on";
+	}
+
+	if (!$dbBsOptions['after']) {
+		$dbBsOptions['after'] = "";
+	}
+
+	if (!$dbBsOptions['show_icons']) {
+		$dbBsOptions['show_icons'] = "true";
+	}
+	
+	if (!$dbBsOptions['position']) {
+		$dbBsOptions['position'] = 'automagically';
+	}
+	// options form
+	echo '<div><form method="post">';
+	echo "<div class=\"wrap\"><h2>Browser Sniff - Show the World your browser and OS</h2>";
+	echo '
+				<h3 class="title">How does this "sniff" works?</h3>
+				<p><a href="http://brunopedrassani.com/wordpress/plugins/browser-sniff" target="_blank">Browser-Sniff</a> is a simple plugin that takes the user-agent string stored in Wordpress and convert it into "images", in order to show in the comment loop what the commenter used to... make the comment. Something like "Using Firefox 3.6.3 in Windows Vista".
+				<br /><br />
+				You need to hook the code pri_print_browser() in your theme - inside the comment_loop - , in order for it to work.</p>
+				<br />
+				<h3 class="title">Customization</h3>				
+				<table class="form-table">';
+					// Width x Height
+					echo '<tr valign="top"><th scope="row">Width x Height:</th>';
+					echo '<td><input type=text width="76px" value="'.$dbBsOptions['width'].'" name="bs_width"> x <input type=text width="76" value="'.$dbBsOptions['height'].'" name="bs_height">
+					<p class=\'help\'>The default is 14x14 px and keep in mind that all images are squared.
+					</p></td></tr>';
+
+					// Before String
+					echo '<tr valign="top"><th scope="row">The Before String:</th>';
+					echo '<td><input type=text value="'.$dbBsOptions['before'].'" name="bs_before">
+					<p class=\'help\'>This is the string that is printed before browser name. Default is "Using".
+					</p></td></tr>';
+
+					// Between String
+					echo '<tr valign="top"><th scope="row">The Between String:</th>';
+					echo '<td><input type=text value="'.$dbBsOptions['between'].'" name="bs_between">
+					<p class=\'help\'>This string is printed between browser name and OS name. Default is "on".
+					</p></td></tr>';
+
+					// After String
+					echo '<tr valign="top"><th scope="row">The After String:</th>';
+					echo '<td><input type=text value="'.$dbBsOptions['after'].'" name="bs_after">
+					<p class=\'help\'>This string is printed after everything. Default is blank.
+					</p></td></tr>';
+					
+					// Show Icons
+					echo '<tr valign="top"><th scope="row">Show Icons?</th>';
+					echo '<td valign="top"><input type=radio value="true" name="bs_show_icons" ';
+						if ($dbBsOptions['show_icons'] == "true") {
+							echo 'checked ';
+						} 
+					
+					echo '>Yes, show them! &nbsp; <input type=radio value="false" name="bs_show_icons" ';
+						if ($dbBsOptions['show_icons'] == "false") {
+							echo 'checked ';
+						} 
+					echo 	' />No, do not show them.</b>
+					<p class=\'help\'>If you choose not to show, put a space after the Before String, otherwise the Browser Name will be "glued" with the Before String.</p></td></tr>';
+					
+					// show position
+					echo '<tr valign="top"><th scope="row">Show position:</th>';
+					echo '<td valign="top"><input type=radio value="automagically" name="bs_position" ';
+						if ($dbBsOptions['position'] == "automagically") {
+							echo 'checked ';
+						} 
+					
+					echo '>Automagically add on the start of each comment &nbsp; <input type=radio value="manually" name="bs_position" ';
+						if ($dbBsOptions['position'] == "manually") {
+							echo 'checked ';
+						} 
+					echo 	' />I\'ll manually add the hook pri_print_browser() to my theme</b>
+					<p class=\'help\'>Choosing automagically will put the "sniff" right on the beginning of each comment. Choose this if you are not familiar with theme editing. Otherwise, choose manually and hook all by yourself :)</p></td></tr>';
+					
+					
+					echo '<input type="hidden" name="bs_submit" value="true"></input>
+					</table>
+					
+					<p class="submit"><input type="submit" value="Save Options &raquo;"></input></p></form>
+					';
+				
+				
+				
+				echo '
+				<table cellspacing="10">
+				<tr>
+				<td style="width:50%" valign="top">
+				<div>
+				If you wanto to know more about Browser Sniff, it\'s functions and the authors, visit <a href="http://brunopedrassani.com/" target="_blank">http://brunopedrassani.com/</a><br />
+				</div>
+				</td>
+				</tr>
+				</table>
+			';
+
+	echo "</div>";
+	echo '</form></div>';
+}
+
+function addbssubmenu() {
+    add_submenu_page('plugins.php', 'Browser Sniff', 'Browser Sniff', 10, __FILE__, 'bs_options'); 
+}
+add_action('admin_menu', 'addbssubmenu');
+
+// ####################################################### End adding options page ##############################################
+
+// ###################################### Printing and core functions ###########################################################
+
+function pri_print_browser ($before = '', $after = '', $image = "true", $between = 'on') {
 	global $user_ID, $post, $comment;
+
+	$dbBsOptions = unserialize(get_option('bs_options'));
+
+	$before=$dbBsOptions['before'];
+	$between=$dbBsOptions['between'];
+	$after=$dbBsOptions['after'];
+	$image=$dbBsOptions['show_icons'];
+
 	get_currentuserinfo();
 	if (!$comment->comment_agent) {
 		return;
@@ -31,7 +190,7 @@ function pri_print_browser ($before = '', $after = '', $image = false, $between 
 	echo $before . $string . $uastring . $after;
 }
 
-function pri_browser_string($ua, $image = false, $between = 'on') {
+function pri_browser_string($ua, $image = "true", $between = 'on') {
 	list(  $browser_name, $browser_code, $browser_ver, $os_name, $os_code, $os_ver,
 		$pda_name, $pda_code, $pda_ver ) = pri_detect_browser($ua);
 	$string = pri_friendly_string($browser_name, $browser_code, $browser_ver, $os_name, $os_code, $os_ver,
@@ -41,6 +200,85 @@ function pri_browser_string($ua, $image = false, $between = 'on') {
 	}
 	return $string;
 }
+
+function pri_get_image_url ($code, $alt) {
+	global $pri_image_url, $pri_image_path;
+	
+	$dbBsOptions = unserialize(get_option('bs_options'));
+
+	$alt = htmlspecialchars($alt);
+	$code = htmlspecialchars($code);
+	if (file_exists("$pri_image_path/$code.png")) {
+		return " <img src='$pri_image_url/$code.png' alt='$alt' width='".$dbBsOptions['width']."' height='".$dbBsOptions['height']."' class='browsericon' /> ";
+	} else {
+		return " ";
+	}
+}
+
+function pri_friendly_string (	$browser_name = '', $browser_code = '', $browser_ver = '',
+				$os_name = '', $os_code = '', $os_ver = '',
+				$pda_name= '', $pda_code = '', $pda_ver = '', $image = "true", $between = 'on' )
+{	
+	$out = '';
+	$browser_name = htmlspecialchars($browser_name);
+	$browser_code = htmlspecialchars($browser_code);
+	$browser_ver = htmlspecialchars($browser_ver);
+	$os_name = htmlspecialchars($os_name);
+	$os_code = htmlspecialchars($os_code);
+	$os_ver = htmlspecialchars($os_ver);
+	$pda_name = htmlspecialchars($pda_name);
+	$pda_code = htmlspecialchars($pda_code);
+	$pda_ver = htmlspecialchars($pda_ver);
+	$between = htmlspecialchars($between);
+	if ($browser_name && $pda_name) {
+		if ($image == "true") $out .= pri_get_image_url($browser_code, $browser_name);
+		$out .= "$browser_name";
+		if ($browser_ver) {
+			$out .= " $browser_ver";
+		}
+		$out .= " $between ";
+		if ($image == "true") $out .= pri_get_image_url($pda_code, $pda_name);
+		$out .= " $pda_name";
+		if ($pda_ver) {
+			$out .= " $pda_ver";
+		}
+	} elseif ($browser_name && $os_name) {
+		if ($image == "true") $out .= pri_get_image_url($browser_code, $browser_name);
+		$out .= "$browser_name";
+		if ($browser_ver) {
+			$out .= " $browser_ver";
+		}
+		$out .= " $between ";
+		if ($image == "true") $out .= pri_get_image_url($os_code, $os_name);
+		$out .= " $os_name";
+		if ($os_ver) {
+			$out .= " $os_ver";
+		}
+	} elseif ($browser_name) {
+		if ($image == "true") $out .= pri_get_image_url($browser_code, $browser_name);
+		$out .= "$browser_name";
+		if ($browser_ver) {
+			$out .= " $browser_ver";
+		}
+	} elseif ($os_name) {
+		if ($image == "true") $out .= pri_get_image_url($os_code, $os_name);
+		$out .= "$os_name";
+		if ($os_ver) {
+			$out .= " $os_ver";
+		}
+	} elseif ($pda_name) {
+		if ($image == "true") $out .= pri_get_image_url($pda_code, $pda_name);
+		$out .= "$pda_name";
+		if ($pda_ver) {
+			$out .= " $pda_ver";
+		}
+	}
+	return $out;
+}
+
+// ###################################### End of Printing and core functions ####################################################
+
+// ##################################### Detections functions and UAs ###########################################################
 
 function pri_detect_browser ($ua) {
 	$ua = preg_replace("/FunWebProducts/i", "", $ua);
@@ -435,78 +673,6 @@ function pri_detect_browser ($ua) {
 									
 }
 
-function pri_get_image_url ($code, $alt) {
-	global $pri_image_url, $pri_image_path, $pri_width_height;
-	$alt = htmlspecialchars($alt);
-	$code = htmlspecialchars($code);
-	if (file_exists("$pri_image_path/$code.png")) {
-		return " <img src='$pri_image_url/$code.png' alt='$alt' width='$pri_width_height' height='$pri_width_height' class='browsericon' /> ";
-	} else {
-		return "";
-	}
-}
-
-function pri_friendly_string (	$browser_name = '', $browser_code = '', $browser_ver = '',
-				$os_name = '', $os_code = '', $os_ver = '',
-				$pda_name= '', $pda_code = '', $pda_ver = '', $image = false, $between = 'on' )
-{
-	$out = '';
-	$browser_name = htmlspecialchars($browser_name);
-	$browser_code = htmlspecialchars($browser_code);
-	$browser_ver = htmlspecialchars($browser_ver);
-	$os_name = htmlspecialchars($os_name);
-	$os_code = htmlspecialchars($os_code);
-	$os_ver = htmlspecialchars($os_ver);
-	$pda_name = htmlspecialchars($pda_name);
-	$pda_code = htmlspecialchars($pda_code);
-	$pda_ver = htmlspecialchars($pda_ver);
-	$between = htmlspecialchars($between);
-	if ($browser_name && $pda_name) {
-		if ($image) $out .= pri_get_image_url($browser_code, $browser_name);
-		$out .= "$browser_name";
-		if ($browser_ver) {
-			$out .= " $browser_ver";
-		}
-		$out .= " $between ";
-		if ($image) $out .= pri_get_image_url($pda_code, $pda_name);
-		$out .= " $pda_name";
-		if ($pda_ver) {
-			$out .= " $pda_ver";
-		}
-	} elseif ($browser_name && $os_name) {
-		if ($image) $out .= pri_get_image_url($browser_code, $browser_name);
-		$out .= "$browser_name";
-		if ($browser_ver) {
-			$out .= " $browser_ver";
-		}
-		$out .= " $between ";
-		if ($image) $out .= pri_get_image_url($os_code, $os_name);
-		$out .= " $os_name";
-		if ($os_ver) {
-			$out .= " $os_ver";
-		}
-	} elseif ($browser_name) {
-		if ($image) $out .= pri_get_image_url($browser_code, $browser_name);
-		$out .= "$browser_name";
-		if ($browser_ver) {
-			$out .= " $browser_ver";
-		}
-	} elseif ($os_name) {
-		if ($image) $out .= pri_get_image_url($os_code, $os_name);
-		$out .= "$os_name";
-		if ($os_ver) {
-			$out .= " $os_ver";
-		}
-	} elseif ($pda_name) {
-		if ($image) $out .= pri_get_image_url($pda_code, $pda_name);
-		$out .= "$pda_name";
-		if ($pda_ver) {
-			$out .= " $pda_ver";
-		}
-	}
-	return $out;
-}
-
 function pri_windows_detect_os ($ua) {
 	if (preg_match('/Windows 95/i', $ua) || preg_match('/Win95/', $ua)) {
 		$os_name = "Windows";
@@ -770,3 +936,21 @@ function pri_detect_apple_device( $ua ){
 
 	return array($os_name, $os_code, $os_ver);
 }
+
+// ############################# End of Detections functions and UAs ###########################################################
+
+// ############################### This is only if you do not want to edit your template #######################################
+
+function add_automagically($content) {
+	$addin=pri_print_browser();
+	$content=" ".$addin."\n".$content;
+	return $content;
+}
+
+$dbBsOptions = unserialize(get_option('bs_options'));
+
+if (!$dbBsOptions['position'] OR $dbBsOptions['position'] == 'automagically') {
+	add_filter('comment_text','add_automagically');
+}
+
+// ######################################## End of Laziness :D #################################################################

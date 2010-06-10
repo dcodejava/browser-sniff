@@ -4,7 +4,7 @@ Donate link:
 Tags: browser, operating system, browser sniff
 Requires at least: 1.5.0
 Tested up to: 2.9.2
-Stable tag: 1.13
+Stable tag: 2.0
 
 Detects web browser type and operating system to show in the comment loop
 
@@ -15,13 +15,15 @@ Detects web browser type and operating system to show in the comment loop
 * Can show web browser/operating system icons
 * If the user is "cookied" - a.k.a blog admin visiting the blog - , it also displays an asterisk titled with the full user agent string(just mouse hover the asterisk to see the string). Regular visitors can't see this feature.
 * All mainstream browsers and SOs are detected, blogging softwares(trackbacks/pingbacks), text based browsers, antiquated browsers, cell phones and pdas
+* It can be "automagically" added in your theme if you do not want/like to edit templates 
 
 == Installation ==
 
 1. Download and extract the plugin, you should see a browser-sniff directory
 1. Install like any other Wordpress plugin, just place the browser-sniff folder in your wp-content/plugins directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php pri_print_browser("Using ", "", true, 'on'); ?>` in your templates, especifically on the comment loop. See the Usage section for more info
+1. Go to the Plugins->Browser Sniff menu and set your options
+1. (optional) Place `<?php pri_print_browser(); ?>` in your templates, especifically on the comment loop. See the Usage section for more info
 1. (optional) You can change how the icon look in your CSS by modifying style for selector img.browsericon
 
 == Frequently Asked Questions ==
@@ -38,9 +40,9 @@ Yes, you can, and I appreciate that. Some icons may not be the best, but I don't
 
 I'm not the original author, Priyadi from [http://priyadi.net](http://priyadi.net) is. But he discontinued the development, so I contacted him and now I'm the new maintaner/developer of it. I'm an author, but not the original one.
 
-= I can't find the plugin administration on WP! Why? =
+= I don't like where the plugin shows the browser and OS. Can I change it? =
 
-There is no administration, at least for now. Future releases will let you control a series of options from the panel, but not now.
+Yes you can, but you need to place the hook by yourself on the theme, and choose "manually" on the plugin admin page.
 
 == Screenshots ==
 
@@ -109,7 +111,13 @@ There is no administration, at least for now. Future releases will let you contr
 * Detects Windows Phone OS
 * Fixed Avant Browser detection
 
+= 2.0 =
+* Admin menu available at Plugins->Browser Sniff. Now you can set a lot of options, like size of icons, Strings to print, whether to show icons or not and to place the hook "automagically".
+
 == Upgrade Notice ==
+
+= 2.0 =
+Entire code being rewritten for better performance and usability! Admin menu available with a set of options to change!
 
 = 1.13 =
 Tons of new detections, new icons and some bug fixes!
@@ -122,11 +130,15 @@ First release on http://wordpress.org/extend/plugins, with maintaner change(to B
 
 == Usage ==
 
-Usage is pretty simple. Just use the function pri_print_browser("Using ", "", true, 'on'); wherever you want in the comment loop. The parameters here are:
+Usage is pretty simple.
+
+If you choose the "automagically" option, no need to worries, but it can be placed where you do not want it to be. 
+
+If you want to place the code into your theme, just use the function pri_print_browser("Using ", "", true, 'on'); wherever you want in the comment loop. Also you can simply use pri_print_browser(); and the options will be loaded from database. The parameters here are:
 
 1. String to be printed before description("Using" in this case)
 1. String to be printed after description(nothing i.t.c)
-1. true or false to display icons or not
+1. true or false to display icons or not. Default is true
 1. String to be printed between web broser and operating system. Default is 'on'.
 
 The default use of the plugin show something like this:
