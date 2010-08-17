@@ -2,7 +2,7 @@
 /**
  * @package Browser-Sniff
  * @author Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
- * @version 2.0
+ * @version 2.0.1
  */
 /*
 Plugin Name: Browser Sniff
@@ -656,6 +656,11 @@ function pri_detect_browser ($ua) {
 			list($os_name, $os_code, $os_ver) = pri_windows_detect_os($ua);
 		} else {
 			list($os_name, $os_code, $os_ver) = pri_unix_detect_os($ua);
+			if ($os_code == "macos") {
+				$browser_name = '';
+				$browser_code = '';
+				$browser_ver = '';
+			}
 		}
 	} 
 	/* vars:
@@ -905,7 +910,7 @@ function pri_pda_detect_os ($ua) {
 function pri_detect_apple_device( $ua ){
 	if (preg_match('#iPod#i', $ua ) && preg_match('#OS ([a-zA-Z0-9_]+)#i', $ua, $matches)) {
 		$os_ver = str_replace('_','.',$matches[1]);
-		$os_name = "iPod/iPhone OS";
+		$os_name = "iOS";
 		$os_code = "macos";
 	}
 	elseif (preg_match('#iPod#i', $ua )) {
