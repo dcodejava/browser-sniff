@@ -115,7 +115,7 @@ Yes you can, but you need to place the hook by yourself on the theme, and choose
 * Admin menu available at Plugins->Browser Sniff. Now you can set a lot of options, like size of icons, Strings to print, whether to show icons or not and to place the hook "automagically".
 
 = 2.0.1 =
-* Fixed bug a bug that showed Netscape under some Apple devices
+* Fixed bug a bug that showed Netscape under some Apple devices, thanks to [ShaolinTiger](http://www.shaolintiger.com)
 * Changed iPod/iPhone OS to iOS
 
 == Upgrade Notice ==
