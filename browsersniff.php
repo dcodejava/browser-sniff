@@ -2,7 +2,7 @@
 /**
  * @package Browser-Sniff
  * @author Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
- * @version 2.0.1
+ * @version 2.1
  */
 /*
 Plugin Name: Browser Sniff

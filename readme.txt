@@ -4,7 +4,7 @@ Donate link:
 Tags: browser, operating system, browser sniff
 Requires at least: 1.5.0
 Tested up to: 3.0.1
-Stable tag: 2.0.1
+Stable tag: 2.1
 
 Detects web browser type and operating system to show in the comment loop
 
@@ -114,13 +114,13 @@ Yes you can, but you need to place the hook by yourself on the theme, and choose
 = 2.0 =
 * Admin menu available at Plugins->Browser Sniff. Now you can set a lot of options, like size of icons, Strings to print, whether to show icons or not and to place the hook "automagically".
 
-= 2.0.1 =
+= 2.1 =
 * Fixed bug a bug that showed Netscape under some Apple devices, thanks to [ShaolinTiger](http://www.shaolintiger.com)
 * Changed iPod/iPhone OS to iOS
 
 == Upgrade Notice ==
 
-= 2.0.1 =
+= 2.1 =
 Fixed some bugs with Apple devices detections and updated the compatibility to 3.0.1
 
 = 2.0 =
