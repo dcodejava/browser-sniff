@@ -3,8 +3,8 @@ Contributors: bpedrassani
 Donate link:
 Tags: browser, operating system, browser sniff
 Requires at least: 1.5.0
-Tested up to: 3.0.1
-Stable tag: 2.1
+Tested up to: 3.1.3
+Stable tag: 2.2
 
 Detects web browser type and operating system to show in the comment loop
 
@@ -118,7 +118,14 @@ Yes you can, but you need to place the hook by yourself on the theme, and choose
 * Fixed bug a bug that showed Netscape under some Apple devices, thanks to [ShaolinTiger](http://www.shaolintiger.com)
 * Changed iPod/iPhone OS to iOS
 
+= 2.2 =
+* Changed all Apple devices OS to iOS
+* Changed Mac OS X detection to show version
+
 == Upgrade Notice ==
+
+= 2.2 =
+Changed Apple device detection and compatibility of the plugin up to 3.1.3
 
 = 2.1 =
 Fixed some bugs with Apple devices detections and updated the compatibility to 3.0.1
@@ -150,7 +157,7 @@ If you want to place the code into your theme, just use the function pri_print_b
 
 The default use of the plugin show something like this:
 
-** Using Mozilla Firefox Mozilla Firefox 3.6.3 on Windows Windows XP **
+** Using Mozilla Firefox Mozilla Firefox 4.0 on Windows Windows 7 **
 
 If there's no recorded user agent string(WP1.5-), strings before and after will no be printed.
 If you are logged as administrator of the WP-based site("cookied"), you'll see an asterisk after the print, with the full user agent string detected by Wordpress. Just hover the asterisk to see it. This is useful to see if the plugin is working correctly.

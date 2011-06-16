@@ -825,10 +825,10 @@ function pri_unix_detect_os ($ua) {
 		$os_code = "sun";
 	} elseif (preg_match('/iPhone/i', $ua) || preg_match('/iPad/i', $ua) || preg_match('/iPod/i', $ua) ) {
 		list($os_name, $os_code, $os_ver) = pri_detect_apple_device($ua);
-	} elseif (preg_match('/Mac OS X/i', $ua)) {
-		$os_name = "Mac OS";
+	} elseif (preg_match('#Mac OS X ([a-zA-Z0-9_]+)#i', $ua, $matches)) { 
+		$os_name = "Mac OS X";
 		$os_code = "macos";
-		$os_ver = "X";
+		$os_ver = str_replace('_','.',$matches[1]);;
 	} elseif (preg_match('/Macintosh/i', $ua)) {
 		$os_name = "Mac OS";
 		$os_code = "macos";
@@ -915,27 +915,27 @@ function pri_detect_apple_device( $ua ){
 	}
 	elseif (preg_match('#iPod#i', $ua )) {
 		$os_ver = "";
-		$os_name = "iPod";
+		$os_name = "iOS";
 		$os_code = "macos";
 	}
 	elseif (preg_match('#iPhone OS ([a-zA-Z0-9_]+)#i', $ua, $matches)) {
 		$os_ver = str_replace('_','.',$matches[1]);
-		$os_name = "iPhone OS";
+		$os_name = "iOS";
 		$os_code = "macos";
 	}
 	elseif (preg_match('#iPhone#i', $ua )) {
 		$os_ver = "";
-		$os_name = "iPhone";
+		$os_name = "iOS";
 		$os_code = "macos";
 	}
 	elseif (preg_match('#iPad#i', $ua ) && preg_match('#OS ([a-zA-Z0-9_]+)#i', $ua, $matches)) {
 		$os_ver = str_replace('_','.',$matches[1]);
-		$os_name = "iPad";
+		$os_name = "iOS";
 		$os_code = "macos";
 	}
 	elseif (preg_match('#iPad#i', $ua )) {
 		$os_ver = "";
-		$os_name = "iPad";
+		$os_name = "iOS";
 		$os_code = "macos";
 	}
 
