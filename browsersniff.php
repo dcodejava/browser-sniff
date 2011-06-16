@@ -2,14 +2,14 @@
 /**
  * @package Browser-Sniff
  * @author Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
- * @version 2.1
+ * @version 2.2
  */
 /*
 Plugin Name: Browser Sniff
 Plugin URI: http://brunopedrassani.com/wordpress/plugins/browser-sniff
 Description: Detects web browser type and operating system to show in the comment loop
-Version: 2.1
-Author: Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani(maintaner)
+Version: 2.2
+Author: Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
 Author URI: http://brunopedrassani.com
 */
 
