@@ -32,9 +32,9 @@ Detects web browser type and operating system to show in the comment loop
 
 Your device is too new or I did not get the user agent string to parse in the code. Send me the user agent string and the name of the unrecognized device, and I'll fix it.
 
-= I didn't like the icon for "name-your-browser-or-so-here". Can I send you a better one? =
+= I didn't like the icon for "name-your-browser-or-so-here". Can I change/send you a better one? =
 
-Yes, you can, and I appreciate that. Some icons may not be the best, but I don't spend that much time looking for them. If you've got a better one, send me, and if I like I'll put it in the next release.
+Yes, you can. There`s a directory named "icons", with all of them. Just change the ones you want. Some icons may not be the best, but I don't spend that much time looking for them. If you've got a better one, send me, and if I like I'll put it in the next release.
 
 = Are you the original author of the plugin? Priyadi just have the same plugin you do! =
 
