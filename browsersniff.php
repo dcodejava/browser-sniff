@@ -2,13 +2,13 @@
 /**
  * @package Browser-Sniff
  * @author Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
- * @version 2.2
+ * @version 2.3
  */
 /*
 Plugin Name: Browser Sniff
 Plugin URI: http://brunopedrassani.com/wordpress/plugins/browser-sniff
 Description: Detects web browser type and operating system to show in the comment loop
-Version: 2.2
+Version: 2.3
 Author: Priyadi Iman Nurcahyo | Bruno Andrade Pedrassani
 Author URI: http://brunopedrassani.com
 */
@@ -704,6 +704,10 @@ function pri_windows_detect_os ($ua) {
 		$os_name = "Windows";
 		$os_code = "win_7";
 		$os_ver = "7";
+	} elseif (preg_match('/Windows NT 6.2/i', $ua)) {
+		$os_name = "Windows";
+		$os_code = "win_8";
+		$os_ver = "8";
 	} elseif (preg_match('/Windows NT 5.1/i', $ua)) {
 		$os_name = "Windows";
 		$os_code = "windows";

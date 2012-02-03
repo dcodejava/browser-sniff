@@ -4,7 +4,7 @@ Donate link:
 Tags: browser, operating system, browser sniff
 Requires at least: 1.5.0
 Tested up to: 3.3.1
-Stable tag: 2.2
+Stable tag: 2.3
 
 Detects web browser type and operating system to show in the comment loop
 
@@ -122,7 +122,14 @@ Yes you can, but you need to place the hook by yourself on the theme, and choose
 * Changed all Apple devices OS to iOS
 * Changed Mac OS X detection to show version
 
+= 2.3 =
+* Added Windows 8 detection
+* Updated the compatibility list
+
 == Upgrade Notice ==
+
+= 2.3 =
+Added Windows 8 detection and updated compatibility list
 
 = 2.2 =
 Changed Apple device detection and compatibility of the plugin up to 3.1.3
